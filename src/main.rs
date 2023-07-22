@@ -1,8 +1,9 @@
 use std::error::Error;
-use std::path::{PathBuf};
-use clap::{Parser, Subcommand};
+use clap::{Parser};
+use crate::command::Commands;
 
 mod core;
+mod command;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -11,21 +12,10 @@ struct Cli {
 	command: Commands,
 }
 
-#[derive(Subcommand, Debug)]
-enum Commands {
-	Import {
-		csv_path: PathBuf
-	}
-}
-
-fn main() -> Result<(), Box<dyn Error>> {
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn Error>> {
 	let cli = Cli::parse();
-	match &cli.command {
-		Commands::Import { csv_path: path } => {
-			command::import(path)
-		}
-	}
+	cli.command.run().await
 }
 
-mod command;
 
