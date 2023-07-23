@@ -79,6 +79,7 @@ dependencies = [
  "clap",
  "csv",
  "directories",
+ "futures",
  "hyper",
  "ipfs-api-backend-hyper",
  "serde",

@@ -3,8 +3,8 @@ use crate::core::Event;
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct State {
-	head: Option<Event>,
-	pins: Vec<String>,
+	pub head: Option<Event>,
+	pub pins: Vec<String>,
 }
 
 impl Default for State {
